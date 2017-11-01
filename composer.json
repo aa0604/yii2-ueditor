@@ -1,0 +1,21 @@
+{
+    "name": "xing.chen/yii2-ueditor",
+    "description": "Yii2的百度UEditor扩展 修正打开文件浏览时卡的问题",
+    "type": "yii2-extension",
+    "keywords": ["yii2","ueditor"],
+    "license": "MIT",
+    "authors": [
+        {
+            "name": "xing.chen",
+            "email": "877349686@qq.com"
+        }
+    ],
+    "require": {
+        "yiisoft/yii2-imagine": "~2.1.0"
+    },
+    "autoload": {
+        "psr-4": {
+            "xing\\ueditor\\": ""
+        }
+    }
+}
