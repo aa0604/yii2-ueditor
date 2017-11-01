@@ -68,7 +68,7 @@ class EditorController extends xing\ueditor\UEditorController
 ```php
     'controllerMap' => [
         'ueditor' => [
-            'class' => 'xing.chen\ueditor\UEditorController',
+            'class' => 'xing\ueditor\UEditorController',
         ]
     ],
 ```
@@ -78,7 +78,8 @@ class EditorController extends xing\ueditor\UEditorController
 ```
     'controllerMap' => [
         'ueditor' => [
-            'class' => 'xing.chen\ueditor\UEditorController',
+            'class' => 'xing\ueditor\UEditorController',
+            'class' => 'xing\ueditor\UEditorController',
             'thumbnail' => false,//如果将'thumbnail'设置为空，将不生成缩略图。
             'watermark' => [    //默认不生存水印
                 'path' => '', //水印图片路径
@@ -120,12 +121,12 @@ class EditorController extends xing\ueditor\UEditorController
 就像使用普通的扩展一样。
 
 ```
-<?= $form->field($model, 'content')->widget(\xing.chen\ueditor\UEditor::className()) ?>
+<?= $form->field($model, 'content')->widget(\xing\ueditor\UEditor::className()) ?>
 ```
 或者
 
 ```
-<?= \xing.chen\ueditor\UEditor::widget([
+<?= \xing\ueditor\UEditor::widget([
     'model' => $model,
     'attribute' => 'content',
 ]) ?>
@@ -134,7 +135,7 @@ class EditorController extends xing\ueditor\UEditorController
 还可以配置更多属性：
 
 ```
-<?= \xing.chen\ueditor\UEditor::widget([
+<?= \xing\ueditor\UEditor::widget([
     'model' => $model,
     'attribute' => 'content',
     'config' => [
@@ -152,7 +153,7 @@ class EditorController extends xing\ueditor\UEditorController
 
 
 ```
-<?= \xing.chen\ueditor\UEditor::widget([
+<?= \xing\ueditor\UEditor::widget([
     'name' => $name,
     'value' => $value,
 ]) ?>
