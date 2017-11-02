@@ -10,9 +10,6 @@
             "email": "877349686@qq.com"
         }
     ],
-    "require": {
-        "yiisoft/yii2-imagine": "~2.1.0"
-    },
     "autoload": {
         "psr-4": {
             "xing\\ueditor\\": ""

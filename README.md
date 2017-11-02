@@ -22,7 +22,7 @@ Yii2的百度UEditor扩展
 使用如下命令安装：
 
 ```
-php composer.phar require --prefer-dist xing.chen/yii2-ueditor "*"
+php composer.phar require --prefer-dist xing.chen/yii2-ueditor "dev-master"
 ```
 
 或者将 `"xing.chen/yii2-ueditor": "*"` 添加到项目的 `composer.json` 文件.
