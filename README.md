@@ -39,7 +39,7 @@ php composer.phar require --prefer-dist xing.chen/yii2-ueditor "dev-master"
 1) 继承 `xing\ueditor\UEditorController` 来实现自己的后端。（推荐）
 
 ```php
-class EditorController extends xing\ueditor\UEditorController
+class UeditorController extends \xing\ueditor\UEditorController
 {
     public function init(){
         parent::init();
