@@ -49,7 +49,7 @@ class UeditorController extends \xing\ueditor\UEditorController
     
     public function actionConfig(){
         //do something
-        //这里可以对 config 请求进行自定义响应
+        //这里可以对 config 请求进行自定义响应，不需要定制的就删除此方法
     }
     
     // more modify ...
@@ -75,10 +75,10 @@ class UeditorController extends \xing\ueditor\UEditorController
 
 简单配置即可使用，还可以配置更多选项：
 
-```
+```php
+<?php
     'controllerMap' => [
         'ueditor' => [
-            'class' => 'xing\ueditor\UEditorController',
             'class' => 'xing\ueditor\UEditorController',
             'thumbnail' => false,//如果将'thumbnail'设置为空，将不生成缩略图。
             'watermark' => [    //默认不生存水印
@@ -101,11 +101,10 @@ class UeditorController extends \xing\ueditor\UEditorController
     ],
 ```
 
-后端配置参考官网[后端配置说明](http://fex-team.github.io/ueditor/#server-config "后端配置")。
 
 扩展默认生成 `200x200` 的缩略图，缩略图大小可以通过 `thumbnail` 来控制。
 
-```
+```php
     'thumbnail' => ['height' => 200, 'width' => 200]
 ```
 
@@ -120,12 +119,12 @@ class UeditorController extends \xing\ueditor\UEditorController
 
 就像使用普通的扩展一样。
 
-```
+```php
 <?= $form->field($model, 'content')->widget(\xing\ueditor\UEditor::className()) ?>
 ```
 或者
 
-```
+```php
 <?= \xing\ueditor\UEditor::widget([
     'model' => $model,
     'attribute' => 'content',
@@ -134,7 +133,7 @@ class UeditorController extends \xing\ueditor\UEditorController
 
 还可以配置更多属性：
 
-```
+```php
 <?= \xing\ueditor\UEditor::widget([
     'model' => $model,
     'attribute' => 'content',
