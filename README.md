@@ -52,6 +52,25 @@ class UeditorController extends \xing\ueditor\UEditorController
         //这里可以对 config 请求进行自定义响应，不需要定制的就删除此方法
     }
     
+    /**
+     * 定制上传方法（覆盖父方法）
+     * @param $fieldName
+     * @param $config
+     * @param $base64
+     * @return array
+     */
+    protected function upload($fieldName, $config, $base64 = 'upload')
+    {
+        $instance = UploadLogic::getInstance('ali');
+        $return = $instance->upload($fieldName, 'store');
+        return [
+            'state' => 'SUCCESS',
+            'url' => $return['url'],
+            'thumbnail' => $return['url'],
+            'width' => 500,
+            'height' => 500
+        ];
+    }
     // more modify ...
     // 更多的修改
 }
