@@ -125,6 +125,12 @@ trait UEditorTrait
      */
     public function actionIndex()
     {
+        return $this->getConfig();
+    }
+
+    public function actionUeditorConfig()
+    {
+
         $action = strtolower(Yii::$app->request->get('action', 'config'));
         $actions = [
             'uploadimage' => 'upload-image',
