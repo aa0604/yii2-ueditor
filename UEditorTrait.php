@@ -214,9 +214,26 @@ trait UEditorTrait
             'maxSize' => $this->config['fileMaxSize'],
             'allowFiles' => $this->config['fileAllowFiles']
         ];
-        $fieldName = $this->config['fileFieldName'];
-        $result = $this->upload($fieldName, $config);
+        $result = $this->upload('file', $config);
         return $this->show($result);
+    }
+    /**
+     * 上传文件
+     */
+    public function actionXing()
+    {
+        $config = [
+            'pathFormat' => $this->config['filePathFormat'],
+            'maxSize' => $this->config['fileMaxSize'],
+            'allowFiles' => $this->config['fileAllowFiles']
+        ];
+        $result = $this->upload('file', $config);
+        return $this->show([
+            'msg' => null,
+            'code' => 0,
+            'url' => $result['url'],
+            'attachment' => $result['url'],
+        ]);
     }
 
     /**
