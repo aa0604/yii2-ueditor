@@ -9,9 +9,11 @@
  */
 namespace xing\ueditor;
 
+use xing\helper\yii\UploadLogic;
 use yii;
 use yii\imagine\Image;
 use yii\web\Controller;
+use yii\web\UploadedFile;
 
 /**
  * Class UEditorController
@@ -75,6 +77,8 @@ trait UEditorTrait
      * @var string
      */
     public $defaultAction = 'index';
+    
+    private $uploader;
 
     /**
      * Web根目录
@@ -169,7 +173,20 @@ trait UEditorTrait
             'allowFiles' => $this->config['imageAllowFiles']
         ];
         $fieldName = $this->config['imageFieldName'];
-        $result = $this->upload($fieldName, $config);
+        $upload = UploadedFile::getInstanceByName($fieldName);
+        $result = UploadLogic::ApiUpload($fieldName, 'backend');
+        $result = [
+            'height' => '',
+            'width' => '',
+            'original' => $upload->name,
+            'size' => $upload->size,
+            'state' => $upload->error == 0 ? 'SUCCESS' : 'FAIL',
+            'title' => '',
+            'type' => '.' . $upload->getExtension(),
+            'url' => $result['url'],
+        ];
+        // 先上
+        $return = $this->upload($fieldName, $config);
         return $this->show($result);
     }
 
@@ -236,6 +253,20 @@ trait UEditorTrait
         ]);
     }
 
+    public function actionXingInput()
+    {
+        try {
+            $return = UploadLogic::apiUpload('file', Yii::$app->request->post('module'));
+            return $this->show([
+                'msg' => null,
+                'code' => 0,
+                'url' => $return['url'],
+                'attachment' => $return['saveUrl'],
+            ]);
+        } catch (\Exception $e) {
+            return ['msg' => $e->getMessage(), 'code' => 1];
+        }
+    }
     /**
      * 文件列表
      */
@@ -308,16 +339,16 @@ trait UEditorTrait
      */
     protected function upload($fieldName, $config, $base64 = 'upload')
     {
-        $up = new Uploader($fieldName, $config, $base64);
+        $up = $this->uploader = new Uploader($fieldName, $config, $base64);
 
         if ($this->allowIntranet)
             $up->setAllowIntranet(true);
 
         $info = $up->getFileInfo();
-        if (($this->thumbnail or $this->zoom or $this->watermark) && $info['state'] == 'SUCCESS' && in_array($info['type'], ['.png', '.jpg', '.bmp', '.gif'])) {
+        /*if (($this->thumbnail or $this->zoom or $this->watermark) && $info['state'] == 'SUCCESS' && in_array($info['type'], ['.png', '.jpg', '.bmp', '.gif'])) {
             $info['thumbnail'] = Yii::$app->request->baseUrl . $this->imageHandle($info['url']);
-        }
-        $info['url'] = Yii::$app->request->baseUrl . $info['url'];
+        }*/
+        $info['url'] = Yii::$app->request->hostInfo .$info['url'];
         $info['original'] = htmlspecialchars($info['original']);
         $info['width'] = $info['height'] = 500;
         return $info;
